@@ -1,7 +1,7 @@
 %%Ejercicio 19 (BE2)
 hold on;
 t = (0:0.1:10)';
-unitstep = t >= 0;
+unitstep = t >= 0;      % para dibujar el escalon unitario
 plot(t, unitstep, '-b')     %-b es un color
 
 k = 1;
@@ -35,6 +35,7 @@ den = [1 4 (1+k)];
 FTG4 = tf(num, den)
 step(FTG4, '-m'); 
 
+legend('step', 'k=1','k=3','k=4','k=8','k=20')
 figure(2)
 rlocus(FTLA);   %el LG siempre va a ser FTLA
 %Grafica los 2 polos -2-raiz3 y -2+raiz3
