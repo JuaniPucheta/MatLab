@@ -1,7 +1,7 @@
-%%Error en Estado Estacionario - Problema Regulador
+%% Error en Estado Estacionario
 figure(1)
 hold off
-hold on %Permite hacer 2 graficas en la misma figura
+hold on % Permite hacer 2 graficas en la misma figura
 
 u = ones(201); %escalon, genera 201 unos
 t = 0:0.1:20; %va del 0 al 20 con un incremento del 0.1

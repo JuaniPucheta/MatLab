@@ -1,4 +1,4 @@
-% Sintonización de Controladores 27/05
+% Sintonización de Controladores y Ultima Ganancia27/05
 
 %% Método 1: Curva de Reacción del Proceso
 
