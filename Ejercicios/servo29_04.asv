@@ -33,14 +33,13 @@ hold on
 step(FTLC)
 t = (-1:0.01:10);
 unitstep = t>=0;
-plot(t, unitstep, 'r')
+
 
 title('Respuesta a una Entrada Escalon - Problema Servo')
 ylabel('Amplitud')
 xlabel('Tiempo')
-legend('C(t)', 'Entrada Escalon')
-xlim([-1 7])
-ylim([0 1.5])
+legend('C(t)')
+
 
 
 
