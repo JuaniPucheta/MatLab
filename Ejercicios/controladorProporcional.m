@@ -1,4 +1,4 @@
-%% Controlador Proporcional
+%% Controlador Proporcional - 20/05
 clc
 z = [''];
 p = [-1 -0.5];
