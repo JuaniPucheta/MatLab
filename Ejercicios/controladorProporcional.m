@@ -17,7 +17,7 @@ figure(1)
 rlocus(FTLAP)
 xlim([-1.5 1])
 ylim([-3 3])
-title('Control Proporcional')
+title('LGR Control Proporcional (P)')
 
 % Salidas del Sistema en Lazo Cerrado
 figure(2)
