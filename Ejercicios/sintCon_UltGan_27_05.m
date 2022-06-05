@@ -1,4 +1,4 @@
-% Sintonización de Controladores y Ultima Ganancia27/05
+% Sintonización de Controladores y Ultima Ganancia 27/05
 
 %% Método 1: Curva de Reacción del Proceso
 
@@ -15,6 +15,7 @@ step(Gp*H)
 dt = 0.05;
 t = 0:dt:8;
 C = step(Gp,t);
+% Punto de Inflexión 
 dC = diff(C)/dt;    % derivada
 d2C = diff(dC)/dt;  % derivada segunda
 
@@ -22,8 +23,11 @@ d2C = diff(dC)/dt;  % derivada segunda
 tpi = t(p)          % tiempo de punto de inflexion, se da en el 0.75
 Cpi = C(p)          % se da en el 0.1625
 
+% y = m*x + h
 L = 0.2241;
 T = 1.9418;
+
+% Parametros
 kp = 1.2*T/L;
 Ti = 2*L
 Td = 0.5*L;
