@@ -167,7 +167,7 @@ clc
 k = 0.5           % tomamos k y kp iguales
 T1 = 0.5          % cte de tiempo
 Td = 1.1          % tiempo de retardo
-TaoD = -0.2;         % tiempo DERIVATIVO
+TaoD = 0.2;         % tiempo DERIVATIVO
 H = 1;            % unitario
 %------------------------------------------
 
