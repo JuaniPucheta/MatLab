@@ -17,27 +17,29 @@ plot(t, C, '-b');
 
 %----Punto de Inflexion----
 dC = diff(C)/dt;
-d2C = diff(C)/dt;
+d2C = diff(dC)/dt;
 %--------------------------
 
 figure(2)
-hold on;
-plot(C, '-b');
-plot(dC, '-r');
-plot(d2C, '-g');
-    legend('C(t)', 'dC(t)', 'd2C(t)');
+hold on
+plot(C, '-b')
+plot(dC, '-r')
+plot(d2C, '-g')
+    legend('C(t)', 'dC(t)', 'd2C(t)')
+    grid
     axis([0 70 -0.04 0.1])
 
-[m, p] = max(dC);
-tpi = t(p);
+[m, p] = max(dC)    % CONSOLA m=0.0312
+tpi = t(p)      % CONSOLA da 0.65 (x), entonces en la GRAFICA lo marco con punto y me fijo el valor de Y=0.01167
     % y = m*x + h
     % 0.01167 = 0.0312*0.65 + h 
                             % h = (-0.00858)
-T = 1.3356;
-    % AL=G(0) --> 0.04167 = 0.0312.T - 0.00858 --> T=1.6101 --> Ti = T-L = 1.33556
-    % el valor de Ti es el que pongo en matlab como T
 L = 0.275;
     % L=-ord/m --> 0.00858/0.0312
+T = 1.3356;
+    % AL=G(0) --> 0.04167 = 0.0312.T - 0.00858 --> T=1.6101 --> Ti = T-L = 1.33556
+        % GRAFICA 0.04167 es el valor donde se estabiliza (grafica linea 13)
+    % el valor de Ti es el que pongo en matlab como T
 
 %-----Tabla amarilla--------
 kp = (1.2*T/L);

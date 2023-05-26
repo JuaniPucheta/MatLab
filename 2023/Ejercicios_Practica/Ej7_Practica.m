@@ -10,7 +10,7 @@ G = tf(num, den)                % FT
     % oscila, con exponencial negativa
 
 %---------------z = 1-----------------------------------------
-z = 1;                          % CRITICAMENTE AMORTIGUADO
+z = 0.7;                          % CRITICAMENTE AMORTIGUADO
 num = [wn^2];
 den = [1 (2*z*wn) wn^2];
 G1 = tf(num, den)                
@@ -25,7 +25,7 @@ impulse(G, G1, G2)              % funcion Impulso
     xlabel('Tiempo');
     ylabel('Amplitud');
     title('Sistema de 2do Orden - variando Z');
-    legend('G(t) z=0.1', 'G1(t) z=1', 'G2(t) z=2')
+    legend('G(t) z=0.1', 'G1(t) z=0.7', 'G2(t) z=2')
 
 hold off;
 

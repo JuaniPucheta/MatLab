@@ -4,7 +4,7 @@ clc
 z = [''];
 p = [-1 -0.5];
 H = [1];                        % realimentación unitaria
-[num, den] = zp2tf(num, den);
+[num, den] = zp2tf(z, p, 1);
 Gp = tf(num, den);              % FT de la Planta
 
 kp = 1;
@@ -36,5 +36,3 @@ figure(2)
 step(FTLC1, FTLC2, FTLC3)
     % k=0.5 --> el polo se aleja a la izquierda, se establiza mas rapido y responde mas rapido
     % a medida que aumento el K oscila, y el sobreimpulso es mas grande
-
-asd

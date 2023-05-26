@@ -1,7 +1,7 @@
 %% Bode - Sistema de Fase Minima
 
 k = 1;
-Ga = zpk([], [0], k);
+Ga = zpk([], [0], k);       % es lo mismo que poner k
 Gp = tf([k], [1 1 1]);
 H = zpk([], [-2], k);
 FTLA = Ga * Gp * H;

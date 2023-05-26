@@ -10,7 +10,7 @@ Gp = tf(num, den);              % FT de la Planta
 kp = 1;         
 GcP = tf(kp);        % FT del controlador proporcional
 
-FTLA = Gc * Gp;      % Para hacer el LGR
+FTLA = GcP * Gp;      % Para hacer el LGR
 
 figure(1)
     rlocus(FTLA)

@@ -1,8 +1,8 @@
 %% ------------inciso A----------------------
 hold on;
 
-%k = 1;                 es estable
-k = 2.5;                % se desestabiliza, polos a la derecha
+k = 1;                   %es estable
+%k = 2.5;                % se desestabiliza, polos a la derecha
     % Según cálculos en carpeta --> 0 < k < 1.55
 
 num = [k (2*k)];
