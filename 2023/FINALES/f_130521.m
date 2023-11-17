@@ -1,3 +1,4 @@
+% de Paola Giorsetti en PC/Para_render
 %% Ejercicio 1c)
 clc
 num = [1];

@@ -1,3 +1,4 @@
+% en PC/Para_rendir
 %% Ejercicio diseño controlador
 clc
 z = '';
