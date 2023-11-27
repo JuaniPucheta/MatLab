@@ -58,24 +58,25 @@ GPO = tf(num, den)  % arranca respondiendo mas rapido
 % Sistema de 2do Orden
 p = [-p1, -p2];     % definimos los polos
 k = p1*p2;          % es el producto de las constantes
-[num, den] = zp2tfk(z,p,k);
+[num, den] = zp2tf(z,p,k);
 GSA = tf(num, den)  %Gsistema SobreAmortiguado
 
 % Otra FT de 2do Orden
 p2 = 50;
 p = [-p1, -p2];     
 k = p1*p2;          
-[num, den] = zp2tfk(z,p,k);
-GSA = tf(num, den)
+[num, den] = zp2tf(z,p,k);
+GSA1 = tf(num, den)
 
 step(GSA, GPO, GSA1)
-    % GSA arranca ccomo si fuese una parabola.
+    legend('GSA', 'GPO', 'GSA1')
+    % GSA arranca como si fuese una parabola.
         % GPO inmediatamente sufre un cambio y el sistema empieza a responder,
         % GSA no, y se toma un tiempo. Esa es la diferencia.
     % GSA1 es muy parecida a GPO: a medida que alejamos el 2do polo del eje
         % imaginario, hacia la izquieda, el sistema se aproxima mas a un
         % sistema de 1er Orden. Mientras más esté alejado del sistema
-        % imaginario, menos inffluye en la salida del sistema.
+        % imaginario, menos influye en la salida del sistema.
     % 1er Orden la velocidad de respuesta es más rápida. Inmediatamente
         % sufre un un cambio y responde
         % 2do Orden no, se toma un tiempo
@@ -165,7 +166,7 @@ FTLC = tf(num, den)
 
 figure(1)
 impulse(FTLC);
-    xlim([0 10])
+    xlim([0 20])
     ylim([-2 2])
     title('Respuesta del sistema a una entrada Impulso')
     ylabel('Amplitud')
@@ -185,7 +186,7 @@ FTLC = tf(num, den)
 
 figure(1)
 impulse(FTLC);
-    xlim([0 10])
+    xlim([0 30])
     ylim([-2 2])
     title('Respuesta del sistema a una entrada Impulso')
     ylabel('Amplitud')
@@ -218,6 +219,7 @@ pzmap(FTLC)
     % tenemos un polo a la derecha del eje Imag.
 
 %% Problema Servo
+clc
 num = [18];
 den = [1 2 26];
 FTLC = tf(num, den);
@@ -225,12 +227,12 @@ FTLC = tf(num, den);
 figure(1)
 hold on
 
-step(FTLC, 'b')
+step(FTLC, 'b');
     t = -1:0.01:7;  % tiempo donde va a estar definida (0.01 es el incremento)
 unitstep = t >= 0;  % funcion escalon
-    plot(t, unitstep, '-r')
+    plot(t, unitstep, '-r');
  
-title('Respuesta a una entrada Escalon - Problema Servo')
+title('Respuesta a una entrada Escalon - Problema Servo');
     ylabel('Amplitud');
     xlabel('Tiempo');
     legend('C(t)', 'Entrada Escalon');
@@ -238,6 +240,7 @@ title('Respuesta a una entrada Escalon - Problema Servo')
     ylim([0 1.5]);
     % steady state 0.692 => valor donde se estabiliza
     % Ess => diferencia entre escalon y donde se estabiliza el sistema
+stepinfo(FTLC) % me da los valores del Caracteristics de la grafica
 
 %% Lugar Geometrico de las Raices LGR
 num = [1];
@@ -261,11 +264,13 @@ den = [1 2+k];
 FTLC2 = tf(num, den)
 
 figure(2)
-step(FTLC, FTLC1, FTLC2)
+step(FTLA, FTLC, FTLC2)
+    legend('FTLA', 'FTLC', 'FTLA1')
     % mientras más grande sea el K, más negativo es el polo y más rápida
         % va a ser la respuesta, y disminuye el ESS
 
 %% Lugar Geométrico de las Raíces LGR - otra función
+clc
 num = [1];
 den = [1 1 0];
 FTLA = tf(num, den);
@@ -288,11 +293,14 @@ den = [1 1 k];
 FTLC2 = tf(num, den)
 
 figure(2)
-step(FTLC, FTLC1, FTLC2)
-    xlim([0 30])
+step(FTLA, FTLC, FTLC2)
+    legend('FTLA', 'FTLC', 'FTLC2')
+    xlim([0 15])
+    ylim([-1 3])
     % 0.05 sobreamortiguado
     % 0.25 criticamente amort.
     % 10 subamortiguado, overshoot 60% (es muy grande), presenta oscilaciones
+stepinfo(FTLC)
 
 %% Controlador proporcional
 clc
@@ -331,6 +339,7 @@ FTLC3 = feedback(Gc*Gp, H);
 
 figure(2)
 step(FTLC1, FTLC2, FTLC3)
+    legend('FTLC1', 'FTLC2', 'FTLC2')
     % k = 0.5 --> el polo se aleja a la izquierda, se estabiliza más rápido
         % y responde más rápido
     % a medida que aumento el K oscila, y el sobreimpulso es más grande
@@ -500,7 +509,7 @@ step(FTLC, '-r');
 
 %------Mejorando los parametros (2)-----
 kp1 = 1.5 * kp;
-Td2 = 3 * Td;
+Td2 = 3 * Td1;
 
 num = [kp1*Td2*Ti kp1*Ti kp1];
 den = [Ti 0];
@@ -513,7 +522,7 @@ step(FTLC, '-r');
 
 %------Mejorando los parametros (3)-----
 kp2 = 1.5 * kp;
-Td3 = 3 * Td;
+Td3 = 3 * Td2;
 
 num = [kp2*Td3*Ti kp2*Ti kp2];
 den = [Ti 0];
@@ -623,3 +632,21 @@ pzmap(FTLC)
     % tenemos 2 polos en LC sobre el eje Imag., oscila de manera indefinida
     % aun asi, es de fase mínima
 
+%% Ejercicio 32 - Metodo CRP (con zp2tf())
+z = '';
+k = 1;
+p = [-2 -3 -4];
+[num, den] = zp2tf(z,p,k);
+Gp = tf(num, den);
+
+%-----step------
+dt = 0.05;
+t = 0:dt:8;
+C = step(Gp, t);
+%---------------
+
+figure(1)
+    plot(t, C, '-b');
+    ylabel('Amplitud');
+    xlabel('Tiempo');
+    legend('C(t) - Exacta');

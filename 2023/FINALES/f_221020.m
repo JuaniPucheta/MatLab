@@ -96,7 +96,7 @@ figure(1)
     rlocus(FTLAPID)
     title('LGR - PID')
 
-%=====Salida del Sistema en LC (PI)=====
+%=====Salida del Sistema en LC (PID)=====
 FTLC1 = feedback(FTLAPID, 1);
 
 Td = 2;
