@@ -243,8 +243,42 @@ figure(3)
         title('Escalon - Controlador PID')
         legend('PID', 'PID Mejorado')
         xlim([0 70])
-        % overshoot 5.36 y tp = 2.38
+        % overshoot 5.36% y tp = 2.38 segundos
 
+%% Final 08/08/2022
+num = [1];
+den = [4 10];
+G = tf(num, den);
 
+figure(1)
+    pzmap(G)
+    title('Polos y Ceros de la G')
+    ylabel('Amplitud'); xlabel('Tiempo'); legend('G')
 
+figure(2)
+    step(G)
+    title('Escalon para G')
+    ylabel('Amplitud'); xlabel('Tiempo'); legend('G(t)'); ylim([0 0.15])
 
+%% Parcial 20/10/2023
+num = [4];
+den = [1 -1 -3];
+Gp = tf(num, den);
+
+figure(1)
+    step(Gp)
+    ylabel('Amplitud'); xlabel('Tiempo'); legend('FTLC');
+    title('Respuesta Escalon');
+    % inestable, diverge sin limite
+
+den2 = [1 -1 2];
+Gp2 = tf(num, den2);
+
+figure(2)
+    step(Gp2)
+        ylabel('Amplitud'); xlabel('Tiempo'); legend('FTLC 2');
+        title('Respuesta Escalon');
+
+figure(3)
+    pzmap(Gp2)
+    title('Polos y Ceros de FTLC 2')
